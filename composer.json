@@ -1,0 +1,22 @@
+{
+    "name": "trainking/huobi",
+    "description": "huobi API for php.",
+    "type": "library",
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^7.1@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "trainking",
+            "email": "yefulincode@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload":{
+        "psr-4":{
+            "Huobi\\": "src/"
+        }
+    }
+}
