@@ -2,7 +2,7 @@
 
 namespace Huobi;
 
-use GuzzleHttp\Client;
+// use GuzzleHttp\Promise\Client;
 use Huobi\Exception\ConfigException;
 
 /**
@@ -18,7 +18,10 @@ class Huobi
     const DOMIN_DEV = "http://api.testnet.huobi.pro";
 
     // 正式应用
-    const DOMIN_API = "https://www.baidu.com/";  // TODO 修改成正确DOMIN
+    const DOMIN_API = "https://api.huobi.pro";  // 修改成正确DOMIN
+
+    // AWS-日本优化环境
+    const DOMIN_AWS = "https://api-aws.huobi.pro";
 
     // 正式应用标记
     const APP_API = 1;
@@ -26,11 +29,14 @@ class Huobi
     // 测试应用标记
     const APP_DEV = 0;
 
+    // AWS优化环境应用
+    const APP_AWS = 2;
+
     public function __construct($env)
     {
-        $client = new Client();
-        $res = $client->request('OPTIONS', $this->getDomin($env), []);
-        var_dump($res);
+        // $client = new Client();
+        // $res = $client->request('OPTIONS', $this->getDomin($env), []);
+        // var_dump($res);
     }
 
     private function getDomin($env)
@@ -52,6 +58,9 @@ class Huobi
 
     public function getDate()
     {
-        return date("Y-m-d H:i:s");
+        $_timeZone = new \DateTimeZone("UTC");
+        $_dateTime = new \DateTime();
+        $_dateTime->setTimezone($_timeZone);
+        return $_dateTime->format("Y-m-d\TH:i:s");
     }
 }
