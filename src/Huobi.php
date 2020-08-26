@@ -2,7 +2,7 @@
 
 namespace Huobi;
 
-// use GuzzleHttp\Promise\Client;
+use GuzzleHttp\Promise\Client;
 use Huobi\Exception\ConfigException;
 
 /**
@@ -34,7 +34,7 @@ class Huobi
 
     public function __construct($env)
     {
-        // $client = new Client();
+        $client = new Client();
         // $res = $client->request('OPTIONS', $this->getDomin($env), []);
         // var_dump($res);
     }
