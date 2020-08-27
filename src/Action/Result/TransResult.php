@@ -4,6 +4,9 @@ namespace Huobi\Action\Result;
 
 use Huobi\Action\Result\Result;
 
+/**
+ * 交易类API返回
+ */
 class TransResult extends Result
 {
     public function __construct(string $status, int $ts, array $data, string $ch = "")
