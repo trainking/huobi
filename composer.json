@@ -18,5 +18,13 @@
         "psr-4":{
             "Huobi\\": "src/"
         }
+    },
+    "autoload-dev":{
+        "psr-4": {
+            "Huobi\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.5.x-dev"
     }
 }
