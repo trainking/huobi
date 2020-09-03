@@ -5,7 +5,7 @@ namespace Huobi\Action\Result;
 use Huobi\Action\Result\Result;
 use Huobi\Action\Result\QuotesResult;
 use Huobi\Action\Result\TransResult;
-use Huobi\Excetion\JsonException;
+use Huobi\Exception\JsonException;
 
 class ResultFactory
 {
@@ -32,14 +32,14 @@ class ResultFactory
             $_obj = new  QuotesResult(
                 $_resutl_arr['status'],
                 $_resutl_arr['ts'],
-                $_resutl_arr['data'],
+                $_resutl_arr['data'] ?? [],
                 $_resutl_arr['ch'] ?? ''
             );
         } elseif ($apiType == self::API_TRANS) {
-            $_obj = new JsonException(
+            $_obj = new TransResult(
                 $_resutl_arr['status'],
                 $_resutl_arr['ts'],
-                $_resutl_arr['data'],
+                $_resutl_arr['data'] ?? [],
                 $_resutl_arr['ch'] ?? ''
             );
         } else {
