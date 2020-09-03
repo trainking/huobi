@@ -59,22 +59,34 @@ class Signature
         return $this->path;
     }
 
+    // params getter setter
+    public function setParams(array $params)
+    {
+        $this->params = $params;
+    }
+    public function getParams()
+    {
+        return $this->params;
+    }
+
     /**
      * 构造签名字符串
      */
-    private function signStr()
+    public function signStr()
     {
         $s = '';
-        $s.$this->getMethod()."\n";
-        $s.$this->getDomain()."\n";
-        $s.$this->getPath()."\n";
+        $s = $s.$this->getMethod().'\n';
+        $s = $s.$this->getDomain().'\n';
+        $s = $s.$this->getPath().'\n';
 
-        ksort($this->params);
-        $last_key = key(end($this->params));
-        foreach($this->parasm as $k=>$v) {
-            $s.sprintf("%s=%s", urlencode($k), urlencode($v));
+        $params = $this->getParams();
+        ksort($params);
+        end($params);
+        $last_key = key($params);
+        foreach($params as $k=>$v) {
+            $s = $s.sprintf("%s=%s", urlencode($k), urlencode($v));
             if ($k != $last_key) {
-                $s."&";
+                $s = $s."&";
             }
         }
         return $s;
