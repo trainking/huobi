@@ -27,4 +27,24 @@ class SignatureTest extends TestCase
             $obj->signStr()
         );
     }
+
+    public function testSign()
+    {
+        $obj = new Signature();
+        $obj->setMethod("GET");
+        $obj->setDomain("api.huobi.pro");
+        $obj->setPath("/v1/order/orders");
+        $obj->setParams([
+            "AccessKeyId" => "e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx",
+            "order-id" => "1234567890",
+            "SignatureMethod" => "HmacSHA256",
+            "SignatureVersion" => 2,
+            "Timestamp" => "2017-05-11T15:19:30"
+        ]);
+
+        $this->assertEquals(
+            'NTI4YzJlODE2ZmU0OTFkYjYwZDBlOWUxMzc3MGYxMTYwZGQ0Y2I0M2Y5NjNlZDdlMTJkNzkyNzE3MjQxMWY3Yw==',
+            $obj->sign('abcdasjfalsfdjlas')
+        );
+    }
 }
