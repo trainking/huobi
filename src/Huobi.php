@@ -3,10 +3,12 @@
 namespace Huobi;
 
 use GuzzleHttp\Promise\Client;
+use Huobi\Action\Action;
+use Huobi\Action\Result\Result;
 use Huobi\Exception\ConfigException;
 
 /**
- * main
+ * main  使用单例
  * 1. 实现构建请求
  * 2. 检测网络
  * 3. 创建指定分类
@@ -32,14 +34,21 @@ class Huobi
     // AWS优化环境应用
     const APP_AWS = 2;
 
-    public function __construct($env)
+    private $client = null;
+
+    private $domin = "";
+
+    private static $instance = null;
+
+    private function __construct(int $env) 
     {
-        $client = new Client();
-        // $res = $client->request('OPTIONS', $this->getDomin($env), []);
-        // var_dump($res);
+        $this->domin = $this->getDomin($env);
+        $this->client = new Client();
     }
 
-    private function getDomin($env)
+    private function __clone() {}
+
+    private function getDomin(int $env)
     {
         $_domin = null;
         switch ($env) {
@@ -54,6 +63,31 @@ class Huobi
                 break;
         }
         return $_domin;
+    }
+
+    /**
+     * 单例出口
+     * @param int $env 应用标记
+     * @return Huobi 单例实现
+     */
+    final public static function getInstance(int $env) 
+    {
+        if (self::$instance instanceof self) {
+            return self::$instance;
+        }
+
+        self::$instance = new self($env);
+        return self::$instance;
+    }
+
+    /**
+     * 执行调用
+     * @param Action $action 接口实例
+     * @return Result 返回结构化返回
+     */
+    public function doAction(Action $action)
+    {
+
     }
 
     public function getDate()
