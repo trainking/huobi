@@ -9,7 +9,7 @@ interface Action
 {
     // 执行方法
     function getMethod();
-    function getUri();
+    function getUri(string $domin);
     function getOptions();
     function toResult(string $jsonStr);
 }

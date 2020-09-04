@@ -87,7 +87,7 @@ class Huobi
      */
     public function doAction(Action $action)
     {
-        $response = $this->clent->request($action->getMethod(), $action->getUri(), $action->getOptions());
+        $response = $this->client->request($action->getMethod(), $action->getUri($this->domin), $action->getOptions());
         if ($response->getStatusCode() == 200) {
             $jsonStr = $response->getBody();
             return $action->toResult($jsonStr);
