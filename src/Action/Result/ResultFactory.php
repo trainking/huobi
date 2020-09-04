@@ -5,6 +5,7 @@ namespace Huobi\Action\Result;
 use Huobi\Action\Result\Result;
 use Huobi\Action\Result\QuotesResult;
 use Huobi\Action\Result\TransResult;
+use Huobi\Action\Result\MarketStatusResult;
 use Huobi\Exception\JsonException;
 
 class ResultFactory
@@ -14,6 +15,9 @@ class ResultFactory
 
     // 交易API
     const API_TRANS = 1;
+
+    // 市场状态
+    const API_MARKET_STATUS = 3;
 
     /**
      * Result 工厂方法
@@ -42,10 +46,26 @@ class ResultFactory
                 $_resutl_arr['data'] ?? [],
                 $_resutl_arr['ch'] ?? ''
             );
-        } else {
-            // TODO 其他
+        } elseif ($apiType == self::API_MARKET_STATUS) {
+            $_obj = new MarketStatusResult(
+                $_resutl_arr['code'],
+                $this->nowMillisecond(),
+                $_resutl_arr['data'] ?? [],
+                $_resutl_arr['ch'] ?? ''
+            );
         }
         
         return $_obj;
+    }
+
+    /**
+     * 获取当前时间的毫秒级别
+     * @return float
+     */
+    private function nowMillisecond()
+    {
+        list($msec, $sec) = explode(' ', microtime());
+        $msectime = (float)sprintf("%.0f", (floatval($msec) + floatval($sec)) * 1000);
+        return $msectime;
     }
 }

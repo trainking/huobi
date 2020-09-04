@@ -2,7 +2,7 @@
 
 namespace Huobi;
 
-use GuzzleHttp\Promise\Client;
+use GuzzleHttp\Client;
 use Huobi\Action\Action;
 use Huobi\Action\Result\Result;
 use Huobi\Exception\ConfigException;
@@ -87,7 +87,7 @@ class Huobi
      */
     public function doAction(Action $action)
     {
-
+        $this->clent->request($action->getMethod(), $action->getUri(), $action->getOptions());
     }
 
     public function getDate()

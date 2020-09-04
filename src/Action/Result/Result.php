@@ -20,7 +20,7 @@ abstract class Result
     // string 返回状态对应的中文意思
     protected $cn_msg = "";
 
-    public function __construct(string $status, int $ts, array $data, string $ch = "")
+    public function __construct(string $status, float $ts, array $data, string $ch = "")
     {
         $this->status = $status;
         $this->ts = $ts;

@@ -8,5 +8,8 @@ namespace Huobi\Action;
 interface Action 
 {
     // 执行方法
-    function do();
+    function getMethod();
+    function getUri();
+    function getOptions();
+    function toResult();
 }

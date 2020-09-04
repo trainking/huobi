@@ -14,5 +14,15 @@ use Huobi\Action\BaseAction;
  */
 class MarketStatusAction extends BaseAction
 {
+    protected $category_link = "/v2/market-status";
+    protected $request_method = "GET";
+
+    /**
+     * 返回请求options
+     */
+    public  function getOptions()
+    {
+        return [];
+    }
 
 }

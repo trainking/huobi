@@ -25,6 +25,26 @@ abstract class BaseAction implements Action
      */
     protected $request_method = "GET";
 
+
+    /**
+     * 返回请求方法
+     * @return string 请求犯法 GET|POST...
+     */
+    public function getMethod()
+    {
+        return $this->request_method;
+    }
+
+    /**
+     * 拼接好的请求链接
+     * @param string $domin 环境对应的domin
+     * @return string uri
+     */
+    public function getUri(string $domin) 
+    {
+        return $domin.$this->category_link;
+    }
+
     // 交给子类实现
-    abstract function do();
+    abstract function getOptions();
 }
