@@ -3,6 +3,7 @@
 namespace Huobi\Action;
 
 use Huobi\Action\BaseAction;
+use Huobi\Action\Result\ResultFactory;
 
 /**
  * 获取当前市场状态，此接口只有正式环境有（2020/09/04）
@@ -23,6 +24,17 @@ class MarketStatusAction extends BaseAction
     public  function getOptions()
     {
         return [];
+    }
+
+    /**
+     * 返回Result
+     * @param string $jsonStr 返回结果json
+     * @return Result
+     */
+    public function toResult(string $jsonStr)
+    {
+        $factory = new ResultFactory();
+        return $factory->getResult(ResultFactory::API_MARKET_STATUS, $jsonStr);
     }
 
 }

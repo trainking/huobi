@@ -87,7 +87,13 @@ class Huobi
      */
     public function doAction(Action $action)
     {
-        $this->clent->request($action->getMethod(), $action->getUri(), $action->getOptions());
+        $response = $this->clent->request($action->getMethod(), $action->getUri(), $action->getOptions());
+        if ($response->getStatusCode() == 200) {
+            $jsonStr = $response->getBody();
+            return $action->toResult($jsonStr);
+        } else {
+            throw new \Exception("Error Response StatusCode: ".$response->getStatusCode());
+        }
     }
 
     public function getDate()

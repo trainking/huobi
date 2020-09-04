@@ -11,5 +11,5 @@ interface Action
     function getMethod();
     function getUri();
     function getOptions();
-    function toResult();
+    function toResult(string $jsonStr);
 }

@@ -47,4 +47,5 @@ abstract class BaseAction implements Action
 
     // 交给子类实现
     abstract function getOptions();
+    abstract function toResult(string $jsonStr);
 }
